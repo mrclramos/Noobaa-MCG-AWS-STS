@@ -24,7 +24,7 @@ aws s3api put-public-access-block --bucket ${BUCKET_NAME} --public-access-block-
 aws s3api put-bucket-ownership-controls --bucket bucket-temp4553 \
   --ownership-controls 'Rules=[{ObjectOwnership="BucketOwnerPreferred"}]'
 ```
-This is 3 commands are equivalent to use the the steps on AWS Console UI: S3 → Buckets → Create Bucket → Fill the bucket name + region → ACLs enabled → uncheck Block all public access → Use the rest of the defaults. 
+These 3 commands are equivalent to use the the steps on AWS Console UI: S3 → Buckets → Create Bucket → Fill the bucket name + region → ACLs enabled → uncheck Block all public access → Use the rest of the defaults. 
 
 ### Extract the Openshift Kube APIserver public key:
 Command to extract the public key from the certificate:
@@ -120,7 +120,7 @@ aws s3api put-object-acl --bucket ${BUCKET_NAME} --key '.well-known/openid-confi
 
 ### Create AWS role and policy
 
-Set your variables
+Set the variables
 ```
 ROLE_NAME=<your_role_name>
 AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query "Account" --output text)
@@ -230,7 +230,7 @@ aws s3api create-bucket --bucket poc-mcg-bstore1 --region ${AWS_REGION} --create
 The noobaa client (or command) must be download and extracted into your PATH
 
 ```
-noobaa backingstore create aws-sts-s3 backingstore-sts --target-bucket poc-mcg-bstore1 --aws-sts-arn arn:aws:iam::443370681991:role/oidc-poc-role
+noobaa backingstore create aws-sts-s3 backingstore-sts --target-bucket poc-mcg-bstore1 --aws-sts-arn arn:aws:iam::${AWS_ACCOUNT_ID}:role/${ROLE_NAME}
 INFO[0000] ✅ Exists: NooBaa "noobaa"
 INFO[0000] ✅ Created: BackingStore "backingstore-sts"
 INFO[0000]
