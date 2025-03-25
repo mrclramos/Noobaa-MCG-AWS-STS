@@ -250,7 +250,7 @@ INFO[0006] ✅ BackingStore "backingstore-sts" Phase is Ready
 
 # BackingStore spec:
 awsS3:
-  awsSTSRoleARN: arn:aws:iam::443370681991:role/oidc-poc-role
+  awsSTSRoleARN: arn:aws:iam::999999999999:role/oidc-test-role
   secret: {}
   targetBucket: poc-mcg-bstore1
 type: aws-s3
