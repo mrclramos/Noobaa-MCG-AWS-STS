@@ -21,8 +21,7 @@ Create the bucket to ba used as OIDC
 ```
 aws s3api create-bucket --bucket ${BUCKET_NAME} --region ${AWS_REGION} --create-bucket-configuration LocationConstraint=${AWS_REGION}
 aws s3api put-public-access-block --bucket ${BUCKET_NAME} --public-access-block-configuration "BlockPublicAcls=false,IgnorePublicAcls=false,BlockPublicPolicy=false,RestrictPublicBuckets=false"
-aws s3api put-bucket-ownership-controls --bucket bucket-temp4553 \
-  --ownership-controls 'Rules=[{ObjectOwnership="BucketOwnerPreferred"}]'
+aws s3api put-bucket-ownership-controls --bucket ${BUCKET_NAME} --ownership-controls 'Rules=[{ObjectOwnership="BucketOwnerPreferred"}]'
 ```
 These 3 commands are equivalent to use the the steps on AWS Console UI: S3 → Buckets → Create Bucket → Fill the bucket name + region → ACLs enabled → uncheck Block all public access → Use the rest of the defaults. 
 
@@ -169,7 +168,7 @@ Configure the OIDC
 ```
 cat <<EOF > create-open-id-connect-provider.json
 {
-  "Url": "{OPENID_BUCKET_URL}",
+  "Url": "${OPENID_BUCKET_URL}",
   "ClientIDList": [
     "openshift"
   ],
@@ -224,7 +223,7 @@ This command should return something like:
 Creating the target bucket
 
 ```
-aws s3api create-bucket --bucket poc-mcg-bstore1 --region ${AWS_REGION} --create-bucket-configuration LocationConstraint=${AWS_REGION}^C
+aws s3api create-bucket --bucket poc-mcg-bstore1 --region ${AWS_REGION} --create-bucket-configuration LocationConstraint=${AWS_REGION}
 ```
 
 The noobaa client (or command) must be download and extracted into your PATH
