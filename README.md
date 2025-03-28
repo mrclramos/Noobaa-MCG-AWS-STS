@@ -61,7 +61,7 @@ cat <<EOF >keys.json
         {
             "use": "sig",
             "kty": "RSA",
-            "kid": "${PUBLIC_SIGNING_KEY_ID}",
+            "kid": "${PUBLIC_SIGNING_KEY}",
             "alg": "RS256",
             "n": "${PUBLIC_SIGNING_KEY_MODULUS}",
             "e": "${PUBLIC_SIGNING_KEY_EXPONENT}"
